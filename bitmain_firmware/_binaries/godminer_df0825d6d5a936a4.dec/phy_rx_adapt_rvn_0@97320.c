@@ -1,0 +1,274 @@
+unsigned int __fastcall phy_rx_adapt_rvn_0(int a1, unsigned int a2, unsigned int a3)
+{
+  void *v6; // r7
+  int v7; // r3
+  int v8; // r0
+  unsigned int *v9; // r3
+  int v10; // r2
+  int v12; // r0
+  int v13; // r2
+  int v14; // r0
+  int v15; // r2
+  int v16; // r0
+  int v17; // r2
+  int v18; // r0
+  int v19; // r2
+  int v20; // r0
+  int v21; // r2
+  char v22[4100]; // [sp+10h] [bp-1004h] BYREF
+
+  v6 = malloc(0xCu);
+  V_LOCK();
+  LOWORD(v7) = -1540;
+  HIWORD(v7) = (unsigned int)&unk_133154 >> 16;
+  logfmt_raw(v22, 0x1000u, 0, v7, "phy_rx_adapt_rvn");
+  V_UNLOCK();
+  zlog(
+    g_zc,
+    "/workspace/jenkins/jenkins/workspace/Antminer_D9_release/build/rootfs/buildroot/tmp/release/build/godminer-origin_go"
+    "dminer-new/backend/backend_rvn_2020/backend_rvn_phy_set.c",
+    173,
+    "phy_rx_adapt_rvn",
+    16,
+    1490,
+    60,
+    v22);
+  sub_8E658(a1, a3, 84, -1);
+  v8 = sub_8E8CC(a1, a2, (unsigned __int16)a3, 84, v6);
+  if ( v8 )
+  {
+    v9 = (unsigned int *)v6;
+    v10 = 0;
+    do
+    {
+      ++v10;
+      if ( *((unsigned __int8 *)v9 + 4) == a2 && *((unsigned __int8 *)v9 + 8) == a3 )
+        goto LABEL_6;
+      v9 += 3;
+    }
+    while ( v8 != v10 );
+  }
+  if ( check_core_reg_with_expect_data_2_rvn_0(a1, a2, a3, 126, 0xF0000000, 4) )
+  {
+    V_LOCK();
+    logfmt_raw(v22, 0x1000u, 0, 1314788, "phy_rx_adapt_rvn", a3);
+    V_UNLOCK();
+    zlog(
+      g_zc,
+      "/workspace/jenkins/jenkins/workspace/Antminer_D9_release/build/rootfs/buildroot/tmp/release/build/godminer-origin_"
+      "godminer-new/backend/backend_rvn_2020/backend_rvn_phy_set.c",
+      173,
+      "phy_rx_adapt_rvn",
+      16,
+      1510,
+      100,
+      v22);
+  }
+  if ( check_core_reg_with_expect_data_2_rvn_0(a1, a2, a3, 127, 0xF0000000, 4) )
+  {
+    V_LOCK();
+    logfmt_raw(v22, 0x1000u, 0, 1314840, "phy_rx_adapt_rvn", a3);
+    V_UNLOCK();
+    zlog(
+      g_zc,
+      "/workspace/jenkins/jenkins/workspace/Antminer_D9_release/build/rootfs/buildroot/tmp/release/build/godminer-origin_"
+      "godminer-new/backend/backend_rvn_2020/backend_rvn_phy_set.c",
+      173,
+      "phy_rx_adapt_rvn",
+      16,
+      1516,
+      100,
+      v22);
+  }
+  sub_8E658(a1, a3, 84, -16711936);
+  v12 = sub_8E8CC(a1, a2, (unsigned __int16)a3, 84, v6);
+  if ( v12 )
+  {
+    v9 = (unsigned int *)v6;
+    v13 = 0;
+    do
+    {
+      while ( 1 )
+      {
+        ++v13;
+        if ( *((unsigned __int8 *)v9 + 4) == a2 )
+          break;
+        v9 += 3;
+        if ( v12 == v13 )
+          goto LABEL_18;
+      }
+      if ( *((unsigned __int8 *)v9 + 8) == a3 )
+        goto LABEL_6;
+      v9 += 3;
+    }
+    while ( v12 != v13 );
+  }
+LABEL_18:
+  sub_8E658(a1, a3, 100, (int)&loc_F000C + 3);
+  v14 = sub_8E8CC(a1, a2, (unsigned __int16)a3, 100, v6);
+  if ( v14 )
+  {
+    v9 = (unsigned int *)v6;
+    v15 = 0;
+    do
+    {
+      while ( 1 )
+      {
+        ++v15;
+        if ( *((unsigned __int8 *)v9 + 4) == a2 )
+          break;
+        v9 += 3;
+        if ( v14 == v15 )
+          goto LABEL_24;
+      }
+      if ( *((unsigned __int8 *)v9 + 8) == a3 )
+        goto LABEL_6;
+      v9 += 3;
+    }
+    while ( v14 != v15 );
+  }
+LABEL_24:
+  sub_8E658(a1, a3, 80, 1966110);
+  v16 = sub_8E8CC(a1, a2, (unsigned __int16)a3, 80, v6);
+  if ( v16 )
+  {
+    v9 = (unsigned int *)v6;
+    v17 = 0;
+    do
+    {
+      while ( 1 )
+      {
+        ++v17;
+        if ( *((unsigned __int8 *)v9 + 4) == a2 )
+          break;
+        v9 += 3;
+        if ( v16 == v17 )
+          goto LABEL_30;
+      }
+      if ( *((unsigned __int8 *)v9 + 8) == a3 )
+        goto LABEL_6;
+      v9 += 3;
+    }
+    while ( v16 != v17 );
+  }
+LABEL_30:
+  sub_8E658(a1, a3, 80, 0);
+  v18 = sub_8E8CC(a1, a2, (unsigned __int16)a3, 80, v6);
+  if ( v18 )
+  {
+    v9 = (unsigned int *)v6;
+    v19 = 0;
+    do
+    {
+      while ( 1 )
+      {
+        ++v19;
+        if ( *((unsigned __int8 *)v9 + 4) == a2 )
+          break;
+        v9 += 3;
+        if ( v18 == v19 )
+          goto LABEL_36;
+      }
+      if ( *((unsigned __int8 *)v9 + 8) == a3 )
+        goto LABEL_6;
+      v9 += 3;
+    }
+    while ( v18 != v19 );
+  }
+LABEL_36:
+  if ( check_core_reg_with_expect_data_2_rvn_0(a1, a2, a3, 119, 0, 4) )
+  {
+    V_LOCK();
+    logfmt_raw(v22, 0x1000u, 0, 1314892, "phy_rx_adapt_rvn", a3);
+    V_UNLOCK();
+    zlog(
+      g_zc,
+      "/workspace/jenkins/jenkins/workspace/Antminer_D9_release/build/rootfs/buildroot/tmp/release/build/godminer-origin_"
+      "godminer-new/backend/backend_rvn_2020/backend_rvn_phy_set.c",
+      173,
+      "phy_rx_adapt_rvn",
+      16,
+      1589,
+      100,
+      v22);
+  }
+  sub_8E658(a1, a3, 84, -1);
+  v20 = sub_8E8CC(a1, a2, (unsigned __int16)a3, 84, v6);
+  if ( v20 )
+  {
+    v9 = (unsigned int *)v6;
+    v21 = 0;
+    while ( 1 )
+    {
+      while ( 1 )
+      {
+        ++v21;
+        if ( *((unsigned __int8 *)v9 + 4) == a2 )
+          break;
+        v9 += 3;
+        if ( v20 == v21 )
+          goto LABEL_44;
+      }
+      if ( *((unsigned __int8 *)v9 + 8) == a3 )
+        break;
+      v9 += 3;
+      if ( v20 == v21 )
+        goto LABEL_44;
+    }
+LABEL_6:
+    a2 = bswap32(*v9);
+    free(v6);
+    return a2;
+  }
+LABEL_44:
+  if ( check_core_reg_with_expect_data_2_rvn_0(a1, a2, a3, 126, 0xF0000000, 4) )
+  {
+    V_LOCK();
+    logfmt_raw(v22, 0x1000u, 0, 1314928, "phy_rx_adapt_rvn", a3);
+    V_UNLOCK();
+    zlog(
+      g_zc,
+      "/workspace/jenkins/jenkins/workspace/Antminer_D9_release/build/rootfs/buildroot/tmp/release/build/godminer-origin_"
+      "godminer-new/backend/backend_rvn_2020/backend_rvn_phy_set.c",
+      173,
+      "phy_rx_adapt_rvn",
+      16,
+      1612,
+      100,
+      v22);
+  }
+  if ( check_core_reg_with_expect_data_2_rvn_0(a1, a2, a3, 127, 0xF0000000, 4) )
+  {
+    V_LOCK();
+    logfmt_raw(v22, 0x1000u, 0, 1314980, "phy_rx_adapt_rvn", a3);
+    V_UNLOCK();
+    zlog(
+      g_zc,
+      "/workspace/jenkins/jenkins/workspace/Antminer_D9_release/build/rootfs/buildroot/tmp/release/build/godminer-origin_"
+      "godminer-new/backend/backend_rvn_2020/backend_rvn_phy_set.c",
+      173,
+      "phy_rx_adapt_rvn",
+      16,
+      1617,
+      100,
+      v22);
+  }
+  sub_8E658(a1, a3, 83, 251662080);
+  if ( check_core_reg_with_expect_data_2_rvn_0(a1, a2, a3, 83, 0, 4) )
+  {
+    V_LOCK();
+    logfmt_raw(v22, 0x1000u, 0, 1314892, "phy_rx_adapt_rvn", a3);
+    V_UNLOCK();
+    zlog(
+      g_zc,
+      "/workspace/jenkins/jenkins/workspace/Antminer_D9_release/build/rootfs/buildroot/tmp/release/build/godminer-origin_"
+      "godminer-new/backend/backend_rvn_2020/backend_rvn_phy_set.c",
+      173,
+      "phy_rx_adapt_rvn",
+      16,
+      1624,
+      100,
+      v22);
+  }
+  return a2;
+}

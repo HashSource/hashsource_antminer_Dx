@@ -1,0 +1,77 @@
+void *runtime_ctrl_kas_2380()
+{
+  void *v0; // r0
+  _QWORD v2[148]; // [sp+0h] [bp-4A4h] BYREF
+
+  memset(v2, 0, sizeof(v2));
+  LODWORD(v2[0]) = backend_init_base;
+  LODWORD(v2[3]) = dhash_mining_stop_base;
+  HIDWORD(v2[0]) = reset_base;
+  LODWORD(v2[2]) = dhash_mining_start_base;
+  HIDWORD(v2[3]) = dhash_mining_reset_base;
+  LODWORD(v2[5]) = async_push_work_base;
+  LODWORD(v2[4]) = backend_exit_base;
+  HIDWORD(v2[4]) = push_work_base;
+  HIDWORD(v2[5]) = pop_ans_base;
+  HIDWORD(v2[8]) = work_2_packet_kas;
+  LODWORD(v2[6]) = try_pop_ans_base;
+  HIDWORD(v2[7]) = softreset_all_chip_one_by_one_kas;
+  LODWORD(v2[9]) = packet_2_nonce_kas;
+  HIDWORD(v2[10]) = global_idx_free_kas;
+  HIDWORD(v2[9]) = check_nonce_kas;
+  LODWORD(v2[10]) = global_idx_init_kas;
+  LODWORD(v2[11]) = set_baud_kas;
+  LODWORD(v2[17]) = get_theory_hashrate_kas;
+  HIDWORD(v2[15]) = sub_91398;
+  HIDWORD(v2[16]) = get_chip_status_kas;
+  HIDWORD(v2[17]) = get_sale_hashrate_kas;
+  LODWORD(v2[19]) = set_sensor_extern_mode_kas;
+  LODWORD(v2[18]) = get_qualify_hashrate_kas;
+  HIDWORD(v2[18]) = get_qualify_nonce_num_kas;
+  HIDWORD(v2[19]) = read_sensor_temp_local_kas;
+  LODWORD(v2[21]) = overclock_update_kas;
+  LODWORD(v2[20]) = read_sensor_temp_remote_kas;
+  HIDWORD(v2[20]) = parameter_update_kas;
+  HIDWORD(v2[21]) = get_pcba_test_level_kas;
+  HIDWORD(v2[24]) = set_frequency_by_temp_single_kas;
+  LODWORD(v2[22]) = get_packet_remain_len_kas;
+  LODWORD(v2[24]) = set_frequency_kas;
+  LODWORD(v2[25]) = set_frequency_single_kas;
+  LODWORD(v2[27]) = read_temperature_kas;
+  HIDWORD(v2[33]) = set_chipaddr_base;
+  LODWORD(v2[26]) = sub_92EEC;
+  HIDWORD(v2[34]) = set_chip_reg_base;
+  LODWORD(v2[36]) = set_core_enable_base;
+  HIDWORD(v2[27]) = top_init_kas;
+  LODWORD(v2[37]) = sync_get_chip_reg_base3;
+  LODWORD(v2[34]) = set_inactive_base;
+  LODWORD(v2[40]) = 3363659;
+  LODWORD(v2[35]) = set_core_reg_base_9;
+  HIDWORD(v2[35]) = set_core_reg_base_9;
+  HIDWORD(v2[50]) = &sensor_kas_2380;
+  v2[43] = 0x100002380LL;
+  HIDWORD(v2[36]) = sync_get_status_base2;
+  v2[44] = 0x2D0000005CLL;
+  v2[52] = 0x500000005CLL;
+  HIDWORD(v2[39]) = sync_get_core_reg_base3;
+  HIDWORD(v2[46]) = 2;
+  HIDWORD(v2[51]) = 2;
+  HIDWORD(v2[48]) = 500;
+  LODWORD(v2[49]) = 500;
+  LODWORD(v2[42]) = 7561579;
+  v2[53] = 0x1FFFFFFECLL;
+  HIDWORD(v2[28]) = dhash_start_kas;
+  HIDWORD(v2[63]) = 1;
+  LODWORD(v2[56]) = 36;
+  HIDWORD(v2[67]) = 1;
+  LODWORD(v2[128]) = 1;
+  v2[127] = 142606;
+  HIDWORD(v2[105]) = 200;
+  v2[106] = 0x800000022LL;
+  v2[107] = 0xE00000036LL;
+  LODWORD(v2[125]) = 1420;
+  LOBYTE(v2[126]) = 15;
+  v2[124] = 0x43C8000042480000LL;
+  v0 = calloc(1u, 0x4A0u);
+  return memcpy(v0, v2, 0x4A0u);
+}

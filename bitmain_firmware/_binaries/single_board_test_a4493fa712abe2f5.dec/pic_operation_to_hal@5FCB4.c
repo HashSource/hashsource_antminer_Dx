@@ -1,0 +1,201 @@
+int __fastcall pic_operation_to_hal(int a1, int a2, unsigned int a3, void *a4)
+{
+  char v5; // r8
+  int flash; // r4
+  size_t v8; // r6
+  int v9; // r3
+  size_t v10; // r11
+  char v11; // r4
+  _BYTE *v12; // r5
+  _BYTE *v13; // r9
+  __int16 v14; // r2
+  int v15; // r0
+  __int16 v16; // r3
+  _BYTE *v17; // r2
+  char *v18; // r7
+  _BYTE *v19; // r4
+  __int16 v20; // t1
+  int v21; // r1
+  int v22; // r0
+  int v23; // r6
+  int v24; // r11
+  int v25; // r11
+  int v26; // r3
+  int v28; // [sp+14h] [bp-1820h]
+  unsigned __int8 v29; // [sp+18h] [bp-181Ch]
+  char v30; // [sp+18h] [bp-181Ch]
+  int v31; // [sp+28h] [bp-180Ch] BYREF
+  char v32; // [sp+2Ch] [bp-1808h]
+  char s[2048]; // [sp+30h] [bp-1804h] BYREF
+  char v34[4100]; // [sp+830h] [bp-1004h] BYREF
+
+  v5 = a3;
+  if ( a2 == 51 )
+  {
+    v8 = HIWORD(a3);
+    v9 = *(_DWORD *)&g_chain_info[8 * a1];
+    v10 = HIWORD(a3) + 8;
+    v31 = 255;
+    v11 = BYTE2(a3);
+    v29 = v9;
+    v32 = 0;
+    v12 = malloc(v10);
+    v13 = malloc(v8 + 2);
+    *v13 = v5;
+    v13[1] = v11;
+    memcpy(v13 + 2, a4, v8);
+    v14 = (unsigned __int8)(v11 + 6);
+    v15 = (unsigned __int8)(v11 + 2);
+    v12[3] = 51;
+    *(_WORD *)v12 = -21931;
+    v16 = v14 + 51;
+    v12[2] = v14;
+    if ( v11 == -2 )
+    {
+      v22 = 5;
+      v21 = 4;
+    }
+    else
+    {
+      v17 = v13 - 1;
+      v18 = v12 + 3;
+      v19 = &v13[(unsigned __int8)(v11 + 1)];
+      do
+      {
+        v20 = (unsigned __int8)*++v17;
+        *++v18 = v20;
+        v16 += v20;
+      }
+      while ( v17 != v19 );
+      v21 = v15 + 4;
+      v22 = v15 + 5;
+    }
+    v23 = v29;
+    v28 = (unsigned __int8)v10;
+    v12[v21] = HIBYTE(v16);
+    v12[v22] = v16;
+    v30 = 4;
+    while ( 1 )
+    {
+      pthread_mutex_lock(&i2c_mutex_all);
+      v24 = g_bitmain_pic_state[2 * v23];
+      if ( pthread_mutex_lock(&stru_3B5254) )
+      {
+        strcpy(s, "failed to i2c lock\n");
+        pthread_mutex_lock(&stru_3B526C);
+        logfmt_raw(v34, 0x1000u, 0, s);
+        pthread_mutex_unlock(&stru_3B526C);
+        zlog(
+          g_zc,
+          "/home/xingfei.wang/work/1764/godminer/backend/device/hal/platform/7007/7007_iic.c",
+          81,
+          "iic_write",
+          9,
+          103,
+          100,
+          v34);
+      }
+      else
+      {
+        i2c_write(v24, (int)v12, v28);
+        pthread_mutex_unlock(&stru_3B5254);
+      }
+      usleep(0x2710u);
+      v25 = g_bitmain_pic_state[2 * v23];
+      if ( pthread_mutex_lock(&stru_3B5254) )
+      {
+        strcpy(s, "failed to i2c lock\n");
+        pthread_mutex_lock(&stru_3B526C);
+        logfmt_raw(v34, 0x1000u, 0, s);
+        pthread_mutex_unlock(&stru_3B526C);
+        zlog(
+          g_zc,
+          "/home/xingfei.wang/work/1764/godminer/backend/device/hal/platform/7007/7007_iic.c",
+          81,
+          "iic_read",
+          8,
+          83,
+          100,
+          v34);
+      }
+      else
+      {
+        i2c_read(v25, (int)&v31, 5);
+        pthread_mutex_unlock(&stru_3B5254);
+      }
+      pthread_mutex_unlock(&i2c_mutex_all);
+      if ( BYTE1(v31) == 51 && (unsigned __int8)v31 == 5 )
+        break;
+      snprintf(s, 0x800u, "PICCMD %d failed on Chain[%d]!", 51, v23);
+      pthread_mutex_lock(&stru_3B526C);
+      logfmt_raw(v34, 0x1000u, 0, s);
+      pthread_mutex_unlock(&stru_3B526C);
+      zlog(
+        g_zc,
+        "/home/xingfei.wang/work/1764/godminer/backend/device/hal/drv_pic/pic_1704.c",
+        75,
+        "pic_process_cmd",
+        15,
+        116,
+        20,
+        v34);
+      sleep(1u);
+      v26 = (unsigned __int8)(v30 - 1);
+      v30 = v26;
+      if ( !v26 )
+      {
+        flash = 0;
+        free(v13);
+        free(v12);
+        pthread_mutex_lock(&stru_3B526C);
+        logfmt_raw(v34, 0x1000u, 0, "chain %d, pic1704_write_flash failed!!!", *(_DWORD *)&g_chain_info[8 * a1]);
+        pthread_mutex_unlock(&stru_3B526C);
+        zlog(
+          g_zc,
+          "/home/xingfei.wang/work/1764/godminer/backend/device/platform_device_hal.c",
+          74,
+          "pic_operation_to_hal",
+          20,
+          427,
+          100,
+          v34);
+        return flash;
+      }
+    }
+    snprintf(s, 0x800u, "PICCMD %d passed on Chain[%d]!", 51, v23);
+    V_LOCK();
+    logfmt_raw(v34, 0x1000u, 0, s);
+    V_UNLOCK();
+    zlog(
+      g_zc,
+      "/home/xingfei.wang/work/1764/godminer/backend/device/hal/drv_pic/pic_1704.c",
+      75,
+      "pic_process_cmd",
+      15,
+      111,
+      20,
+      v34);
+    flash = 1;
+    free(v13);
+    free(v12);
+    return flash;
+  }
+  if ( a2 != 52 )
+    return -1;
+  flash = pic1704_read_flash(g_chain_info[8 * a1], a4, a3, HIWORD(a3));
+  if ( flash == 1 )
+    return flash;
+  pthread_mutex_lock(&stru_3B526C);
+  logfmt_raw(v34, 0x1000u, 0, "chain %d, pic1704_read_flash failed!!!", *(_DWORD *)&g_chain_info[8 * a1]);
+  pthread_mutex_unlock(&stru_3B526C);
+  zlog(
+    g_zc,
+    "/home/xingfei.wang/work/1764/godminer/backend/device/platform_device_hal.c",
+    74,
+    "pic_operation_to_hal",
+    20,
+    435,
+    100,
+    v34);
+  return flash;
+}

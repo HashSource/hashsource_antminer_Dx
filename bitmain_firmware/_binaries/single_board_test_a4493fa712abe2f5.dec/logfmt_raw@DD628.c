@@ -1,0 +1,83 @@
+int logfmt_raw(char *a1, size_t n, int a3, ...)
+{
+  char *v3; // r10
+  int v4; // r6
+  const char **v5; // r5
+  int v6; // r7
+  unsigned int v7; // r4
+  int *v8; // r12
+  int v9; // r9
+  const char *v10; // r4
+  int result; // r0
+  const char *v12; // r2
+  const char *v13; // r4
+  double v14; // [sp+30h] [bp-1014h]
+  char s[4128]; // [sp+40h] [bp-1004h] BYREF
+  va_list varg_r3; // [sp+106Ch] [bp+28h] BYREF
+
+  va_start(varg_r3, a3);
+  v3 = a1;
+  memset(a1, 0, n);
+  memset(s, 0, 0x1000u);
+  if ( dword_3B52A8 <= 0 )
+  {
+    va_copy(v5, varg_r3);
+  }
+  else
+  {
+    v4 = 0;
+    va_copy(v5, varg_r3);
+    v6 = 0;
+    while ( 2 )
+    {
+      v7 = ((unsigned int)v5 + 7) & 0xFFFFFFF8;
+      v5 = (const char **)(v7 + 32);
+      v8 = (int *)(v7 + 16);
+      v9 = *(_DWORD *)(v7 + 8);
+      v10 = *(const char **)v7;
+      result = *v8;
+      v14 = *(double *)v8;
+      switch ( v9 )
+      {
+        case 0:
+          if ( strchr((const char *)LODWORD(v14), 32)
+            || !strcmp((const char *)LODWORD(v14), "true") && strlen((const char *)LODWORD(v14)) == 4 )
+          {
+            v6 += sprintf(&v3[v6], "%s=\"%s\" ", v10, (const char *)LODWORD(v14));
+          }
+          else
+          {
+            v6 += sprintf(&v3[v6], "%s=%s ", v10, (const char *)LODWORD(v14));
+          }
+          goto LABEL_5;
+        case 1:
+          v6 += sprintf(&v3[v6], "%s=%lf ", v10, v14);
+          goto LABEL_5;
+        case 2:
+          v12 = v10;
+          v13 = "false";
+          if ( LOBYTE(v14) )
+            v13 = "true";
+          v6 += sprintf(&v3[v6], "%s=%s ", v12, v13);
+          goto LABEL_5;
+        case 3:
+          v6 += sprintf(&v3[v6], "%s=%lld ", v10, LODWORD(v14), v14);
+LABEL_5:
+          if ( dword_3B52A8 > ++v4 )
+            continue;
+          v3 += v6;
+          break;
+        default:
+          return result;
+      }
+      break;
+    }
+  }
+  vsprintf(s, *v5, v5 + 1);
+  if ( strchr(s, 32) )
+    result = sprintf(v3, "msg=\"%s\"", s);
+  else
+    result = sprintf(v3, "msg=%s", s);
+  dword_3B52A8 = 0;
+  return result;
+}

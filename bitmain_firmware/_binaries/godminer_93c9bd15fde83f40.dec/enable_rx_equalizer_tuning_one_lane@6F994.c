@@ -1,0 +1,42 @@
+int __fastcall enable_rx_equalizer_tuning_one_lane(int a1, int a2, int a3, int a4)
+{
+  int v8; // r7
+  int v9; // r6
+  char v11[4096]; // [sp+10h] [bp-1000h] BYREF
+
+  pthread_mutex_lock(&stru_1A8A24);
+  logfmt_raw(v11, 0x1000u, 0, 1530360, 1530120, a2, a3, a4);
+  pthread_mutex_unlock(&stru_1A8A24);
+  v8 = (unsigned __int16)((_WORD)a4 << 12) | 1;
+  zlog(
+    g_zc,
+    "/workspace/jenkins/jenkins/workspace/Antminer_D7_release/build/rootfs/buildroot/tmp/release/build/godminer-origin_ma"
+    "ster/backend/backend_eth/backend_eth.c",
+    154,
+    "enable_rx_equalizer_tuning_one_lane",
+    35,
+    3571,
+    60,
+    v11);
+  sub_BF774(a1, a3, v8, 0xFFBFFFFF);
+  sub_BF774(a1, a3, (unsigned __int16)((_WORD)a4 << 12) | 0x2F, 0);
+  sub_BF774(a1, a3, v8, 0xFFBFFFFF);
+  sub_BF774(a1, a3, (unsigned __int16)((_WORD)a4 << 12) | 0x2F, 0x400000u);
+  sub_BF774(a1, a3, v8, 0xFFBFFFFF);
+  sub_BF774(a1, a3, (unsigned __int16)((_WORD)a4 << 12) | 0x2F, 0);
+  sub_BF774(a1, a3, v8, 0xFFFFF7FF);
+  sub_BF774(a1, a3, (unsigned __int16)((_WORD)a4 << 12) | 0x37, 0x800u);
+  sub_BF774(a1, a3, v8, 0xBFFFFFFF);
+  v9 = (unsigned __int16)((_WORD)a4 << 12) | 0x98;
+  sub_BF774(a1, a3, (unsigned __int16)((_WORD)a4 << 12) | 0x7E, 0x40000000u);
+  sub_BF774(a1, a3, v8, 0xFEFFFFFF);
+  sub_BF774(a1, a3, v9, 0);
+  sub_BF774(a1, a3, v8, 0xFEFFFFFF);
+  sub_BF774(a1, a3, v9, 0x1000000u);
+  sub_C458C(a1, a2, a3, a4);
+  sub_BF774(a1, a3, v8, 0xFEFFFFFF);
+  sub_BF774(a1, a3, v9, 0);
+  sub_BF774(a1, a3, v8, 0);
+  sub_C4384(a1, a2, a3, a4);
+  return 0;
+}
